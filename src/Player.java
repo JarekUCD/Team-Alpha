@@ -1,13 +1,17 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Player {
+public class Player{
 
-    private String name;    //Player's name
-    private int score = 0;  //Player's current score
-    private char colour;    //Colour of player's pieces
-    private ArrayList<Block> pieces = new ArrayList<Block>();   //ArrayList containing all the pieces player currently has
+    private final String name;      //Player's name
+    private int score = 0;          //Player's current score
+    private final char colour;      //Colour of player's pieces
+    //ArrayList containing all the pieces player currently has
+    private ArrayList<String> pieces = new ArrayList<String>(List.of("i1", "i2", "i3", "i4", "i5", "Y", "N", "X", "U",
+            "W", "P", "F", "V3", "V5", "Z4", "Z5", "T4", "T5", "L4", "L5", "O4"));
 
-    //constructor
+
+    //Constructor
     public Player(String name, char colour){
         this.name = name;
         this.colour = colour;
@@ -18,7 +22,23 @@ public class Player {
         return name + " (" + colour + ") " + " score: " + score;
     }
 
-    //mutator and accessor methods
+    //Method to calculate the player's score
+    public int calculateScore(Board board){
+
+        char[][] layout = board.getLayout();
+
+        //Iterates through the array and counts the number of blocks on the board occupied by the player
+        for (int i = 0; i < 14; i++) {
+            for (int j = 0; j < 14; j++) {
+                if (layout[i][j] == colour){
+                    score++;
+                }
+            }
+        }
+        return score;
+    }
+
+    //Mutator and accessor methods
     public String getName() {
         return name;
     }
@@ -27,7 +47,7 @@ public class Player {
         return score;
     }
 
-    public ArrayList<Block> getPieces() {
+    public ArrayList<String> getPieces() {
         return pieces;
     }
 
@@ -39,3 +59,4 @@ public class Player {
         this.score = score;
     }
 }
+

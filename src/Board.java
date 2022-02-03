@@ -1,6 +1,6 @@
 public class Board {
 
-    private String[][] layout = new String[14][14];
+    private char[][] layout = new char[14][14];
 
     Board(){
         // Blokus Duo has 196 squares which is 14x14
@@ -8,7 +8,7 @@ public class Board {
         //Create array. Fill with blank symbol
         for (int i = 0; i< 14; i++){
             for (int j = 0; j<14; j++){
-                layout[i][j] = "·";
+                layout[i][j] = '·';
             }
         }
     }
@@ -48,5 +48,10 @@ public class Board {
             }
         }
         return b.toString();
+    }
+
+    //Accessor for layout
+    public char[][] getLayout() {
+        return layout;
     }
 }
