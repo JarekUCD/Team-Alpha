@@ -7,6 +7,7 @@ public class Setup{
     Board board = new Board();
     ArrayList<Block> blocks = new ArrayList<>();
 
+    //To fill original arraylist
     public void setupPieces(){
         blocks.add(new Block(1, 'r', "i1"));
         blocks.get(0).setShape(0);
