@@ -3,14 +3,16 @@ public class Block {
 
     public int length; //Number of squares the shape takes up
     public char colour; //The colour of the piece, (It will be the temporary colour for placement)
-
+    public String name; //The name of the block;
     public char[][] shape; //An array used to store the shape of the block
 
     //Constructor
-    public Block(int l, char c){
+    public Block(int l, char c, String n){
         length = l;
         colour = c;
         shape = new char[l][l];
+        name = n;
+
 
         for(int i=0; i<l; i++){
             for (int j = 0; j<l; j++){
