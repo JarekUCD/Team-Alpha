@@ -2,17 +2,17 @@ import java.util.Scanner;
 
 public class Game {
 
-  //  Setup sp;
+    Setup sp;
 
     public void run(){
         String input;
 
         boolean firstTurn = true, gameOver = false;
-
         Scanner scan = new Scanner(System.in);
+        sp.setupPlayers();
 
         while (firstTurn) {
-         //   b1.print();
+            System.out.println(sp.board);
             System.out.println("Type your move");
             input = scan.nextLine();
         }
@@ -21,8 +21,8 @@ public class Game {
         }
     }
 
-   // public Game(Setup s){
-    //    sp = s;
-
+    public Game(Setup s) {
+        sp = s;
+    }
 }
 

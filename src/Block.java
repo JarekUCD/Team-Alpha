@@ -7,13 +7,19 @@ public class Block {
     public char[][] shape; //An array used to store the shape of the block
 
     //Constructor
-    public Block(int l, char c, char[][] arr){
+    public Block(int l, char c){
         length = l;
         colour = c;
-        shape = arr;
+        shape = new char[l][l];
+
+        for(int i=0; i<l; i++){
+            for (int j = 0; j<l; j++){
+                shape[i][j] = ' ';
+            }
+
+        }
     }
 
-    //OLD ROTATION
     public void rotate(){ //Rotates the blocks around the centre of the array
         char[][] temp = new char[length][length];
 
@@ -36,5 +42,23 @@ public class Block {
 
     public int getLength() {
         return length;
+    }
+
+    public void setShape(int... input){
+        for (int j : input) {
+            int row = j / length;
+            int col = j % length;
+            shape[row][col] = 'A';
+        }
+    }
+
+
+    public void printShape() {
+        for(int i=0; i<length; i++){
+            for(int j=0; j<length; j++){
+                System.out.print(shape[i][j]);
+            }
+            System.out.print("\n");
+        }
     }
 }

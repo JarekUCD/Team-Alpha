@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Player{
 
-    private final String name;      //Player's name
+    private String name;      //Player's name
     private int score = 0;          //Player's current score
     private final char colour;      //Colour of player's pieces
     //ArrayList containing all the pieces player currently has
@@ -12,8 +12,7 @@ public class Player{
 
 
     //Constructor
-    public Player(String name, char colour){
-        this.name = name;
+    public Player(char colour){
         this.colour = colour;
     }
 
@@ -58,5 +57,10 @@ public class Player{
     public void setScore(int score) {
         this.score = score;
     }
+
+    public void setName(String n) {
+         name = n;
+    }
+
 }
 

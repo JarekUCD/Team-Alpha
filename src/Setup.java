@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class Setup{
+    Player player2 = new Player('w');
+    Player player1 = new Player('b');
+    Board board = new Board();
+
 
     public void setupPieces(){
         Block i1 = new Block(1, 'r');
@@ -43,48 +47,14 @@ public class Setup{
         Z4.setShape(0,1,4,5);
         Block L5 = new Block(4, 'r');
         L5.setShape(0, 1, 2, 3, 7);
-
-        System.out.println("i1 = ");
-        i1.printShape();
-        System.out.println("L5 = ");
-        L5.printShape();
-        System.out.println("Y = ");
-        Y.printShape();
-        System.out.println("N = ");
-        N.printShape();
-        System.out.println("V3 = ");
-        V3.printShape();
-        System.out.println("U = ");
-        U.printShape();
-        System.out.println("V5 = ");
-        V5.printShape();
-        System.out.println("Z5 = ");
-        Z5.printShape();
-        System.out.println("X = ");
-        X.printShape();
-        System.out.println("T5 = ");
-        T5.printShape();
-        System.out.println("W = ");
-        W.printShape();
-        System.out.println("P = ");
-        P.printShape();
-        System.out.println("F = ");
-        F.printShape();
-        System.out.println("L4 = ");
-        L4.printShape();
-        System.out.println("T4 = ");
-        T4.printShape();
-        System.out.println("Z4 = ");
-        Z4.printShape();
-
     }
 
     public void setupPlayers(){
         Scanner names = new Scanner(System.in);
         System.out.println("Player 1, please enter your name:");
-        Player player1 = new Player(names.nextLine(), 'b');
+        player1.setName(names.nextLine());
         System.out.println("Player 2, please enter your name:");
-        Player player2 = new Player(names.nextLine(), 'w');
+        player2.setName(names.nextLine());
         System.out.println("Player 1 is " + player1);
         System.out.println("Player 2 is " + player2);
 
