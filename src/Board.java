@@ -11,6 +11,8 @@ public class Board {
                 layout[i][j] = '·';
             }
         }
+        layout[9][4] = 'O';
+        layout[4][9] = 'O';
     }
 
     @Override
@@ -48,6 +50,25 @@ public class Board {
             }
         }
         return b.toString();
+    }
+
+    public void place(int x, int y, int r, String n, Player p){
+        int c, i , j;
+
+        for(c = 0; c < p.getPieces().size(); c++){
+            if(n == p.getPieces().get(c).getName()){
+                break;
+            }
+        }
+
+        p.getPieces().get(c).rotate(r);
+
+        for(i = 0; i < p.getPieces().get(c).getLength(); i++){
+            for(j = 0; j <  p.getPieces().get(c).getLength(); j++){
+                layout[y + i][x + j] = p.getPieces().get(c).getShape()[i][j];
+            }
+        }
+
     }
 
     //Accessor for layout

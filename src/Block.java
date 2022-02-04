@@ -22,15 +22,17 @@ public class Block {
         }
     }
 
-    public void rotate(){ //Rotates the blocks around the centre of the array
+    public void rotate(int r){ //Rotates the blocks around the centre of the array
         char[][] temp = new char[length][length];
 
-        for(int i = 0; i < length; i++){
-            for(int j = 0; j < length; j++){
-                temp[i][j] = shape[((length - 1) - j)][i];
+        for(int c = 0; c < r; c++){
+            for(int i = 0; i < length; i++){
+                for(int j = 0; j < length; j++){
+                    temp[i][j] = shape[((length - 1) - j)][i];
+                }
             }
+            shape = temp;
         }
-        shape = temp;
     }
 
     //Accessors
@@ -52,6 +54,9 @@ public class Block {
             int col = j % length;
             shape[row][col] = 'A';
         }
+    }
+    public String getName(){
+        return name;
     }
 
 

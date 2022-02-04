@@ -40,6 +40,5 @@ public class Player{
     public void setPieces(ArrayList<Block> b){
         pieces = b;
     }
-
 }
 

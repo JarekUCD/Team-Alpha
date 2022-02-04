@@ -8,13 +8,14 @@ public class Game {
         boolean firstTurn = true, gameOver = false;
         sp.setupPlayers();
 
-        while (firstTurn) {
-            System.out.println(sp.board);
-            turn(firstTurn);
-        }
         while (!gameOver) {
-            //TODO
+            System.out.println(sp.board);
+            turn(sp.player1);
+            System.out.println(sp.board);
+            turn(sp.player2);
+            firstTurn = false;
         }
+        calculateScore();
     }
 
 
@@ -23,36 +24,60 @@ public class Game {
         sp = s;
     }
 
-    public void turn(boolean ft){
+    public void turn(Player p) {
         int x, y, r;
         String n;
 
-        System.out.println(sp.player1 + ", type your move");
-        Scanner scan = new Scanner(System.in);
+        while(true){
+            System.out.println(p + ", type your move");
+            Scanner scan = new Scanner(System.in);
 
-        x = scan.nextInt();
-        y = scan.nextInt();
-        r = scan.nextInt();
-        n = scan.next();
+            x = scan.nextInt();
+            y = scan.nextInt();
+            r = scan.nextInt();
+            n = scan.next();
 
-        System.out.println(x + " " + y + " " + r + " " + n);
+            System.out.println(x + " " + y + " " + r + " " + n);
+
+            if (valid()) {
+                sp.board.place(x, y, r, n, p);
+                break;
+            }
+        }
     }
 
     //Method to calculate the player's score
-    public int calculateScore(Board board, char colour){
-        int score = 0;
+    public void calculateScore(){
+        int scoreB = 0, scoreW = 0;
 
-        char[][] layout = board.getLayout();
+        char[][] layout = sp.board.getLayout();
 
-        //Iterates through the array and counts the number of blocks on the board occupied by the player
+        //Iterates through the array and counts the number of blocks on the board occupied by each player
         for (int i = 0; i < 14; i++) {
             for (int j = 0; j < 14; j++) {
-                if (layout[i][j] == colour){
-                    score++;
+                if (layout[i][j] == 'B'){
+                    scoreB++;
+                }
+                else if (layout[i][j] == 'W'){
+                    scoreW++;
                 }
             }
         }
-        return score;
+
+        System.out.println(sp.player1 + " got "+ scoreB + " points, " + sp.player2 + " got "+ scoreW + " points.");
+        if(scoreB > scoreW){
+            System.out.println(sp.player1 + " wins!");
+        }
+        else if(scoreW > scoreB){
+            System.out.println(sp.player2 + " wins!");
+        }
+        else{
+            System.out.println("It's a draw!");
+        }
+    }
+
+    public boolean valid(){
+        return true;
     }
 }
 
