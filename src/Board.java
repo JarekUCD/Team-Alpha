@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Board {
 
     private char[][] layout = new char[14][14];
@@ -56,7 +59,7 @@ public class Board {
         int c, i , j;
 
         for(c = 0; c < p.getPieces().size(); c++){
-            if(n == p.getPieces().get(c).getName()){
+            if(Objects.equals(n, p.getPieces().get(c).getName())){
                 break;
             }
         }

@@ -5,6 +5,8 @@ public class Block {
     public char colour; //The colour of the piece, (It will be the temporary colour for placement)
     public String name; //The name of the block;
     public char[][] shape; //An array used to store the shape of the block
+    public int[] pivot = {0, 0}; //The pivot point of the shape
+
 
     //Constructor
     public Block(int l, char c, String n){
@@ -23,15 +25,22 @@ public class Block {
     }
 
     public void rotate(int r){ //Rotates the blocks around the centre of the array
-        char[][] temp = new char[length][length];
+        char[][] tempArr = new char[length][length];
+        int tempInt;
 
         for(int c = 0; c < r; c++){
+            //Rotates the pivot
+            tempInt = pivot[1];
+            pivot[1] = pivot[0];
+            pivot[0] = (length - 1) - tempInt;
+
+            //Rotates the shape
             for(int i = 0; i < length; i++){
                 for(int j = 0; j < length; j++){
-                    temp[i][j] = shape[((length - 1) - j)][i];
+                    tempArr[i][j] = shape[((length - 1) - j)][i];
                 }
             }
-            shape = temp;
+            shape = tempArr;
         }
     }
 
@@ -48,10 +57,18 @@ public class Block {
         return length;
     }
 
-    public void setShape(int... input){
+    public void setShape(int i, int... input){
+        //Sets the pivot
+        int row = i / 4;
+        int col = i % 4;
+        shape[row][col] = '@';
+        pivot[0] = row;
+        pivot[1] = col;
+
+        //Sets the rest of the shape
         for (int j : input) {
-            int row = j / length;
-            int col = j % length;
+            row = j / 4;
+            col = j % 4;
             shape[row][col] = 'A';
         }
     }
@@ -59,6 +76,10 @@ public class Block {
         return name;
     }
 
+    //Prints the name
+    public void printName() {
+        System.out.println(name);
+    }
 
     public void printShape() {
         for(int i=0; i<length; i++){
