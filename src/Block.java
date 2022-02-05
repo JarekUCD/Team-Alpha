@@ -68,4 +68,9 @@ public class Block {
             System.out.print("\n");
         }
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Board {
 
     private char[][] layout = new char[14][14];
 
-    Board(){
+    public Board(){
         // Blokus Duo has 196 squares which is 14x14
 
         //Create array. Fill with blank symbol
@@ -69,6 +72,39 @@ public class Board {
             }
         }
 
+        //Remove piece from ArrayList at index c
+        p.getPieces().remove(c);
+
+    }
+
+    //Method which checks if player's move is valid
+    public boolean isMoveValid(int xInput, int yInput, int rotations, String pieceName, Player player) {
+
+        //check that the coordinates are on the board
+        if (xInput >= 14 || yInput >= 14){
+            return false;
+        }
+
+        Block chosenPiece = findBlockByName(pieceName, player.getPieces());
+
+        //check if the player has the piece
+        if (chosenPiece == null){
+            return false;
+        }
+
+        //check that the place on the board is not already occupied
+        //TODO
+
+        return true;
+    }
+
+    public Block findBlockByName(String pieceName, ArrayList<Block> playerPieces){
+        for (Block piece: playerPieces) {
+            if (Objects.equals(piece.getName(), pieceName)){
+                return piece;
+            }
+        }
+        return null;
     }
 
     //Accessor for layout
