@@ -1,5 +1,5 @@
 # Alpha - Software Engineering Project II
-##Blokus Duo
+## Blokus Duo
 
 ### Assignment 1:
 *Current Versiom*
