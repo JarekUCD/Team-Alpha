@@ -43,6 +43,12 @@ public class Block {
     }
 
     //Accessors
+
+
+    public int[] getPivot() {
+        return pivot;
+    }
+
     public char[][] getShape() {
         return shape;
     }

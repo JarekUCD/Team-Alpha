@@ -4,6 +4,7 @@ import java.util.Objects;
 public class Board {
 
     private char[][] layout = new char[14][14];
+    private Block validMove;
 
     Board(){
         // Blokus Duo has 196 squares which is 14x14
@@ -55,33 +56,19 @@ public class Board {
         return b.toString();
     }
 
-    public void place(int x, int y, int r, String n, Player p){
-        int c, i , j;
+    public void place(int x, int y, int rotations, char colour){
+        int i , j;
 
-        for(c = 0; c < p.getPieces().size(); c++){
-            if(Objects.equals(n, p.getPieces().get(c).getName())){
-                break;
-            }
-        }
-        if(!(c < p.getPieces().size())){
-            System.out.println("test2");
-            return;
-        }
+        validMove.rotate(rotations);
+        int[] v = validMove.getPivot();
 
-
-        p.getPieces().get(c).rotate(r);
-
-        for(i = 0; i < p.getPieces().get(c).getLength(); i++){
-            for(j = 0; j <  p.getPieces().get(c).getLength(); j++){
-                if(p.getPieces().get(c).getShape()[i][j] == 'A'){
-                    layout[y + i][x + j] = p.getPieces().get(c).getShape()[i][j];
+        for(i = 0; i < validMove.getLength(); i++){
+            for(j = 0; j <  validMove.getLength(); j++){
+                if(!(validMove.getShape()[i][j] == ' ')){
+                    layout[y + (i - v[0])][x + (j - v[1])] = colour;
                 }
             }
         }
-
-        //Remove piece from ArrayList at index c
-        p.getPieces().remove(c);
-
     }
 
     //Method which checks if player's move is valid
@@ -99,9 +86,12 @@ public class Board {
             return false;
         }
 
+
+
         //check that the place on the board is not already occupied
         //TODO
-
+        player.getPieces().remove(chosenPiece);
+        validMove = chosenPiece;
         return true;
     }
 

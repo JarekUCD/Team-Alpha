@@ -34,15 +34,13 @@ public class Game {
             System.out.println(p + ", type your move");
             Scanner scan = new Scanner(System.in);
 
-            x = scan.nextInt();
-            y = scan.nextInt();
+            x = scan.nextInt() - 1;
+            y = 14 - (scan.nextInt());
             r = scan.nextInt();
             n = scan.next();
 
-            System.out.println(x + " " + y + " " + r + " " + n);
-
             if (sp.board.isMoveValid(x, y, r, n, p)) {
-                sp.board.place((x - 1), (y - 1), r, n, p);
+                sp.board.place(x, y, r, p.getColour());
                 break;
             } else {
                 System.out.println("Invalid move! Try again");

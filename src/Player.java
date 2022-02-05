@@ -7,7 +7,7 @@ public class Player{
     private int score = 0;          //Player's current score
     private final char colour;      //Colour of player's pieces
     //ArrayList containing all the pieces player currently has
-    private ArrayList<Block> pieces = new ArrayList<Block>();
+    private ArrayList<Block> pieces = new ArrayList<>();
 
 
     //Constructor
@@ -38,7 +38,7 @@ public class Player{
     }
 
     public void setPieces(ArrayList<Block> b){
-        pieces = b;
+        pieces.addAll(b);
     }
 }
 
