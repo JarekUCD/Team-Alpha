@@ -28,6 +28,8 @@ public class Game {
         int x, y, r;
         String n;
 
+        System.out.println(p.getName() + "'s pieces: " + p.getPieces());
+
         while(true){
             System.out.println(p + ", type your move");
             Scanner scan = new Scanner(System.in);
@@ -39,9 +41,11 @@ public class Game {
 
             System.out.println(x + " " + y + " " + r + " " + n);
 
-            if (valid()) {
+            if (sp.board.isMoveValid(x, y, r, n, p)) {
                 sp.board.place((x - 1), (y - 1), r, n, p);
                 break;
+            } else {
+                System.out.println("Invalid move! Try again");
             }
         }
     }
@@ -74,10 +78,6 @@ public class Game {
         else{
             System.out.println("It's a draw!");
         }
-    }
-
-    public boolean valid(){
-        return true;
     }
 }
 
