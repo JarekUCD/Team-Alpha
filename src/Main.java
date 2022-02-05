@@ -8,6 +8,8 @@ public class Main {
         Setup s = new Setup();
         s.setupPieces();
 
+        /*
+        To show all the shapes
         s.blocks.get(0).printName();
         s.blocks.get(0).printShape();
         s.blocks.get(1).printName();
@@ -50,10 +52,10 @@ public class Main {
         s.blocks.get(19).printShape();
         s.blocks.get(20).printName();
         s.blocks.get(20).printShape();
+        */
         
-        
-        //Game game = new Game(s);
-        //System.out.println("Welcome to Blokus Duo!\n ");
-        //game.run();
+        Game game = new Game(s);
+        System.out.println("Welcome to Blokus Duo!\n ");
+        game.run();
     }
 }

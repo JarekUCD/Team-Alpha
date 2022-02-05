@@ -2,16 +2,14 @@ public class Block {
 
 
     public int length; //Number of squares the shape takes up
-    public char colour; //The colour of the piece, (It will be the temporary colour for placement)
     public String name; //The name of the block;
     public char[][] shape; //An array used to store the shape of the block
     public int[] pivot = {0, 0}; //The pivot point of the shape
 
 
     //Constructor
-    public Block(int l, char c, String n){
+    public Block(int l, String n){
         length = l;
-        colour = c;
         shape = new char[l][l];
         name = n;
 
@@ -47,10 +45,6 @@ public class Block {
     //Accessors
     public char[][] getShape() {
         return shape;
-    }
-
-    public char getColour() {
-        return colour;
     }
 
     public int getLength() {
