@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Board {
 
     private char[][] layout = new char[14][14];
@@ -11,8 +13,8 @@ public class Board {
                 layout[i][j] = '·';
             }
         }
-        layout[9][4] = 'O';
-        layout[4][9] = 'O';
+        layout[9][9] = 'O';
+        layout[4][4] = 'O';
     }
 
     @Override
@@ -56,16 +58,26 @@ public class Board {
         int c, i , j;
 
         for(c = 0; c < p.getPieces().size(); c++){
-            if(n == p.getPieces().get(c).getName()){
+            System.out.println(n + "|");
+            System.out.println(p.getPieces().get(c).getName() + "|");
+            if(Objects.equals(n, p.getPieces().get(c).getName())){
+                System.out.println("test");
                 break;
             }
         }
+        if(!(c < p.getPieces().size())){
+            System.out.println("test2");
+            return;
+        }
+
 
         p.getPieces().get(c).rotate(r);
 
         for(i = 0; i < p.getPieces().get(c).getLength(); i++){
             for(j = 0; j <  p.getPieces().get(c).getLength(); j++){
-                layout[y + i][x + j] = p.getPieces().get(c).getShape()[i][j];
+                if(p.getPieces().get(c).getShape()[i][j] == 'A'){
+                    layout[y + i][x + j] = p.getPieces().get(c).getShape()[i][j];
+                }
             }
         }
 

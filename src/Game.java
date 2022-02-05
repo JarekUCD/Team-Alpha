@@ -40,7 +40,7 @@ public class Game {
             System.out.println(x + " " + y + " " + r + " " + n);
 
             if (valid()) {
-                sp.board.place(x, y, r, n, p);
+                sp.board.place((x - 1), (y - 1), r, n, p);
                 break;
             }
         }
