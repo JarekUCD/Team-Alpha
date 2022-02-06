@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Board {
@@ -97,7 +98,7 @@ public class Board {
 
     public Block findBlockByName(String pieceName, ArrayList<Block> playerPieces){
         for (Block piece: playerPieces) {
-            if (Objects.equals(piece.getName(), pieceName)){
+            if (Objects.equals(piece.getName().toUpperCase(), pieceName)){
                 return piece;
             }
         }

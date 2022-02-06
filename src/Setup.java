@@ -9,15 +9,15 @@ public class Setup{
 
     //To fill original arraylist
     public void setupPieces(){
-        blocks.add(new Block(1, "i1"));
+        blocks.add(new Block(1, "I1"));
         blocks.get(0).setShape(0);
-        blocks.add(new Block(2, "i2"));
+        blocks.add(new Block(2, "I2"));
         blocks.get(1).setShape(4, 0);
-        blocks.add(new Block(3, "i3"));
+        blocks.add(new Block(3, "I3"));
         blocks.get(2).setShape(8,0, 4);
-        blocks.add(new Block(4, "i4"));
+        blocks.add(new Block(4, "I4"));
         blocks.get(3).setShape(12, 0, 4, 8);
-        blocks.add(new Block(5, "i5"));
+        blocks.add(new Block(5, "I5"));
         blocks.get(4).setShape(16,0, 4, 8, 12);
         blocks.add(new Block(4, "Y"));
         blocks.get(5).setShape(5, 1, 4, 6, 7);
