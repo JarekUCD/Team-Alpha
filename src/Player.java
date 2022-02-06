@@ -1,5 +1,5 @@
+//Team name: alpha, Student Numbers: 20377771 20709465 20394476
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player{
 
