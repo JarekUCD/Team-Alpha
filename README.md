@@ -12,3 +12,4 @@ First phase of project contains:
 5. Class "Game" controls the functionality of the game itself and calculates the player's score
 6. Class "Main" contains main method which controls everything
 
+Team name: alpha, Student Numbers: 20377771 20709465 
