@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Game {
 
     Setup sp;
+    boolean firstTurn = true, gameOver = false;
 
     public void run(){
-        boolean firstTurn = true, gameOver = false;
         sp.setupPlayers();
 
         while (!gameOver) {
@@ -33,6 +33,8 @@ public class Game {
 
         while(true){
             System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
+
+            //This block takes user co-ordinates. The try-catch prevents an error if the format is invalid.
             while(true){
                 Scanner scan = new Scanner(System.in);
                 try{
@@ -48,11 +50,12 @@ public class Game {
                 }
             }
 
-
-            if (sp.board.isMoveValid(x, y, r, n, p)) {
+            if (firstTurn && (!(x == 4 && y == 9) && !(x == 9 && y == 4))) {   // Prevents placement outside of starting location
+                System.out.println("Invalid move! Please pick one of the starting locations.");
+            } else if (sp.board.isMoveValid(x, y, r, n, p)) {  //Checks for valid move.
                 sp.board.place(x, y, r, p.getColour());
                 break;
-            } else {
+            } else{
                 System.out.println("Invalid move! Try again");
             }
         }

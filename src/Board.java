@@ -55,6 +55,7 @@ public class Board {
 
     public void place(int x, int y, int rotations, char colour){
         int i , j;
+        y = 13-y; // Reverses the position in the array (as 1 on printed board is at bottom, not top)
 
         validMove.rotate(rotations);
         int[] v = validMove.getPivot();
@@ -72,7 +73,7 @@ public class Board {
     public boolean isMoveValid(int xInput, int yInput, int rotations, String pieceName, Player player) {
 
         //check that the coordinates are on the board
-        if (xInput >= 14 || yInput >= 14){
+        if (xInput >= 14 || yInput >= 14 || xInput < 0 || yInput < 0){
             return false;
         }
 
