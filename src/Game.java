@@ -25,19 +25,29 @@ public class Game {
     }
 
     public void turn(Player p) {
-        int x, y, r;
-        String n;
+        int x =-1, y = -1, r = -1;
+        String n = "";
+
 
         System.out.println(p.getName() + "'s pieces: " + p.getPieces());
 
         while(true){
-            System.out.println(p + ", type your move");
-            Scanner scan = new Scanner(System.in);
+            System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
+            while(true){
+                Scanner scan = new Scanner(System.in);
+                try{
+                    char temp = scan.next().charAt(0);
+                    x = (int)temp-65;
+                    y = scan.nextInt() - 1;
+                    r = scan.nextInt();
+                    n = scan.next();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Sorry, invalid format. Please try again using the co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
+                    scan.reset();
+                }
+            }
 
-            x = scan.nextInt() - 1;
-            y = 14 - (scan.nextInt());
-            r = scan.nextInt();
-            n = scan.next();
 
             if (sp.board.isMoveValid(x, y, r, n, p)) {
                 sp.board.place(x, y, r, p.getColour());
@@ -77,5 +87,6 @@ public class Game {
             System.out.println("It's a draw!");
         }
     }
+
 }
 

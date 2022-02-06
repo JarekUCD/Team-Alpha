@@ -53,7 +53,7 @@ public class Main {
         s.blocks.get(20).printName();
         s.blocks.get(20).printShape();
         */
-        
+
         Game game = new Game(s);
         System.out.println("Welcome to Blokus Duo!\n ");
         game.run();

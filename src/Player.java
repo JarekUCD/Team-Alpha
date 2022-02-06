@@ -34,7 +34,7 @@ public class Player{
     }
 
     public void setName(String n) {
-         name = n;
+        name = n;
     }
 
     public void setPieces(ArrayList<Block> b){

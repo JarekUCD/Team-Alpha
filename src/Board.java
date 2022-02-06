@@ -16,8 +16,8 @@ public class Board {
                 layout[i][j] = '·';
             }
         }
-        layout[9][4] = 'O';
-        layout[4][9] = 'O';
+        layout[4][4] = 'O';
+        layout[9][9] = 'O';
     }
 
     @Override
@@ -39,20 +39,16 @@ public class Board {
             for (int j = 0; j < 14; j++) {
                 b.append(" ").append(layout[i][j]).append(" ");
             }
-           //b.append("\n").append(s);
+            //b.append("\n").append(s);
             b.append(s);
 
         }
 
-        //x index numbering (including some formatting based on no of digits)
+        // horizontal axis letters.
         b.append("   ");
-        for (int i = 1; i < 15; i++) {
-            b.append(i);
-            if (i<9){
-                b.append("  ");
-            } else {
-                b.append(" ");
-            }
+        char c;
+        for(c='A'; c <= 'N'; c++){
+            b.append(c + "  ");
         }
         return b.toString();
     }
