@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Board {
 
-    private char[][] layout = new char[14][14];
-    private Block validMove;
+    private char[][] layout = new char[14][14]; //2D array for the board
+    private Block validMove; //A block that was checked to be valid
 
     Board(){
         // Blokus Duo has 196 squares which is 14x14
@@ -16,6 +16,7 @@ public class Board {
                 layout[i][j] = '·';
             }
         }
+        //Starting locations
         layout[4][4] = 'O';
         layout[9][9] = 'O';
     }
@@ -53,9 +54,8 @@ public class Board {
         return b.toString();
     }
 
-    public void place(int x, int y, int rotations, char colour){
+    public boolean place(int x, int y, int rotations, char colour){
         int i , j;
-        y = 13-y; // Reverses the position in the array (as 1 on printed board is at bottom, not top)
 
         validMove.rotate(rotations);
         int[] v = validMove.getPivot();
@@ -67,13 +67,17 @@ public class Board {
                 }
             }
         }
+        return true;
     }
 
     //Method which checks if player's move is valid
-    public boolean isMoveValid(int xInput, int yInput, int rotations, String pieceName, Player player) {
+    public boolean isMoveValid(int xInput, int yInput, int rotations, String pieceName, Player player, boolean ft) {
+        int i, j;
+        boolean stPt = false;
 
         //check that the coordinates are on the board
         if (xInput >= 14 || yInput >= 14 || xInput < 0 || yInput < 0){
+            System.out.println("Invalid move! Try again");
             return false;
         }
 
@@ -81,13 +85,40 @@ public class Board {
 
         //check if the player has the piece
         if (chosenPiece == null){
+            System.out.println("Invalid move! Try again");
             return false;
         }
 
+        //Checks if any part of the block is covering a space that is occupied
+        //Try catch block checks if any part of the block is off the bored
+        try{
+            chosenPiece.rotate(rotations);
+            int[] v = chosenPiece.getPivot();
 
+            for(i = 0; i < chosenPiece.getLength(); i++){
+                for(j = 0; j <  chosenPiece.getLength(); j++){
+                    if(!(chosenPiece.getShape()[i][j] == ' ')){
+                        if(layout[yInput + (i - v[0])][xInput + (j - v[1])] == 'B' || layout[yInput + (i - v[0])][xInput + (j - v[1])] == 'W'){
+                            System.out.println("Invalid move! Try again");
+                            return false;
+                        }
+                        else if(layout[yInput + (i - v[0])][xInput + (j - v[1])] == 'O'){ //Checks if the block is on a starting place
+                            stPt = true;
+                        }
+                    }
+                }
+            }
+        } catch(Exception e){
+            System.out.println("Invalid move! Try again");
+            return false;
+        }
 
-        //check that the place on the board is not already occupied
-        //TODO
+        if(ft && !stPt){//I fit is the first round and a block is not on the starting point, it returns false
+            System.out.println("Invalid move! Try again");
+            return false;
+        }
+
+        //Removes the piece from the list of blocks of the player and records the block to be placed
         player.getPieces().remove(chosenPiece);
         validMove = chosenPiece;
         return true;

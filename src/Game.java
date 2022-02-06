@@ -25,38 +25,33 @@ public class Game {
     }
 
     public void turn(Player p) {
-        int x =-1, y = -1, r = -1;
-        String n = "";
+        int x, y, r;
+        String n;
 
 
         System.out.println(p.getName() + "'s pieces: " + p.getPieces());
 
         while(true){
-            System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
+            System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g 5 2 i5");
 
             //This block takes user co-ordinates. The try-catch prevents an error if the format is invalid.
-            while(true){
+            while(true) {
                 Scanner scan = new Scanner(System.in);
-                try{
-                    char temp = scan.next().charAt(0);
-                    x = (int)temp-65;
-                    y = scan.nextInt() - 1;
+                try {
+                    char temp = scan.next().toUpperCase().charAt(0);
+                    x = (int) temp - 65;
+                    y = 14 - scan.nextInt();
                     r = scan.nextInt();
-                    n = scan.next();
+                    n = scan.next().toUpperCase();
                     break;
                 } catch (Exception e) {
                     System.out.println("Sorry, invalid format. Please try again using the co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
                     scan.reset();
                 }
             }
-
-            if (firstTurn && (!(x == 4 && y == 9) && !(x == 9 && y == 4))) {   // Prevents placement outside of starting location
-                System.out.println("Invalid move! Please pick one of the starting locations.");
-            } else if (sp.board.isMoveValid(x, y, r, n, p)) {  //Checks for valid move.
+            if (sp.board.isMoveValid(x, y, r, n, p, firstTurn)) {  //Checks for valid move.
                 sp.board.place(x, y, r, p.getColour());
                 break;
-            } else{
-                System.out.println("Invalid move! Try again");
             }
         }
     }
