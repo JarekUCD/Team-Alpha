@@ -33,20 +33,20 @@ public class Game {
         System.out.println(p.getName() + "'s pieces: " + p.getPieces());
 
         while(true){
-            System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g 5 2 i5");
+            System.out.println(p + ", type your move, using co-ordinates, followed by the number of rotations then the block name. e.g E 5 2 i5");
 
             //This block takes user co-ordinates. The try-catch prevents an error if the format is invalid.
             while(true) {
                 Scanner scan = new Scanner(System.in);
                 try {
                     char temp = scan.next().toUpperCase().charAt(0);
-                    x = (int) temp - 65;
+                    x = (int) temp - 65;  //converts the character into an integer equivalent
                     y = 14 - scan.nextInt();
                     r = scan.nextInt();
                     n = scan.next().toUpperCase();
                     break;
                 } catch (Exception e) {
-                    System.out.println("Sorry, invalid format. Please try again using the co-ordinates, followed by the number of rotations then the block name. e.g J5 2 i5");
+                    System.out.println("Sorry, invalid format. Please try again using the co-ordinates, followed by the number of rotations then the block name. e.g J 5 2 i5");
                     scan.reset();
                 }
             }

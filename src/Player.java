@@ -6,7 +6,7 @@ public class Player{
     private String name;            //Player's name
     private int score = 0;          //Player's current score
     private final char colour;      //Colour of player's pieces
-    //ArrayList containing all the pieces player currently has
+    //ArrayList containing all the pieces the player currently has
     private ArrayList<Block> pieces = new ArrayList<>();
 
 
