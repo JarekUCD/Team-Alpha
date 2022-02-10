@@ -70,4 +70,9 @@ public class Setup{
 
     }
 
+    public static void main(String[] args) {
+        Setup s = new Setup();
+        s.setupPieces();
+    }
+
 }
