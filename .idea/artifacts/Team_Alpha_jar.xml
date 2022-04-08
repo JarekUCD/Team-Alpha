@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Team-Alpha:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Team_Alpha_jar</output-path>
-    <root id="archive" name="Team-Alpha.jar">
-      <element id="module-output" name="Team-Alpha" />
-    </root>
-  </artifact>
-</component>
