@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -23,19 +24,17 @@ public class PlayScreen extends ScreenAdapter {
     private Stage stage;
     Array<GraphicalGamepiece> pieces;
     GraphicalBoard graphicalBoard;
-    String message;
-    BitmapFont messageFont;
     SpriteBatch batch;
-    float messageX;
-    float messageY;
-    float messageWidth;
+    OrthogonalTiledMapRenderer renderer;
+
 
     public PlayScreen(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
         this.stage = blokusGame.getStage();
         this.batch = blokusGame.batch;
+        this.renderer = blokusGame.renderer;
 
-        MapLayer layer = blokusGame.bored.getLayers().get("Object Layer");
+        MapLayer layer = blokusGame.board.getLayers().get("Object Layer");
         MapObjects objects = layer.getObjects();
 
         pieces = new Array<GraphicalGamepiece>();
@@ -56,13 +55,12 @@ public class PlayScreen extends ScreenAdapter {
 
     public void render(float delta) {
         ScreenUtils.clear(Color.WHITE);
-        super.render(delta);
+        renderer.render();
         batch.begin();
         for (GraphicalGamepiece p : pieces) {
             p.draw(batch);
         }
         graphicalBoard.draw(batch);
-        //messageFont.draw(batch,message,messageX,messageY,messageWidth, Align.center,true);
         batch.end();
         stage.act();
         stage.draw();

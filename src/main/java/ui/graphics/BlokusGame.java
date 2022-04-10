@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -30,8 +31,10 @@ public class BlokusGame extends Game {
     private Skin skin;
     private Stage stage;
     private Thread gameplay;
-    public TiledMap bored;
+    public TiledMap board;
+    OrthogonalTiledMapRenderer renderer;
     SpriteBatch batch;
+    PlayScreenInputProcessor playScreenInputProcessor;
 
     public BlokusGame(BlokusDuoPlay blokusDuoPlay) {
         this.blokusDuoPlay = blokusDuoPlay;
@@ -50,7 +53,9 @@ public class BlokusGame extends Game {
         skin = new Skin(Gdx.files.internal("scene.json"));
         Gdx.input.setInputProcessor(stage);
 
-        bored = new TmxMapLoader().load("playscreen.tmx");
+        board = new TmxMapLoader().load("playscreen.tmx");
+        renderer = new OrthogonalTiledMapRenderer(board);
+        renderer.setView(camera);
 
         startScreen = new StartScreen(this);
         playScreen = new PlayScreen(this);
@@ -59,6 +64,8 @@ public class BlokusGame extends Game {
         // give reference to self (libGDX game) to UI to change state of libGDX app by posting runnables
         GraphicsUI ui = (GraphicsUI)blokusDuoPlay.getUI();
         ui.setBlokusGame(this);
+
+        playScreenInputProcessor = new PlayScreenInputProcessor(this);
 
         // Piped stream provided by UI will be used for sending user input to UI as text strings
         pipe = new PrintStream(ui.getPipe());
