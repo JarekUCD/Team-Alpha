@@ -1,5 +1,6 @@
 package ui.graphics;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.Game;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import control.BlokusDuoPlay;
+import model.Board;
 
 import java.io.PrintStream;
 
@@ -20,15 +22,16 @@ public class BlokusGame extends Game {
     private static final int VIRTUAL_HEIGHT = 810;
 
     private StartScreen startScreen;
-    private PlayScreen playScreen;
+    public PlayScreen playScreen;
     private BlokusDuoPlay blokusDuoPlay;
-    private PrintStream pipe;
-    private OrthographicCamera camera;
+    public PrintStream pipe;
+    public OrthographicCamera camera;
     private Viewport viewport;
     private Skin skin;
     private Stage stage;
     private Thread gameplay;
     public TiledMap bored;
+    SpriteBatch batch;
 
     public BlokusGame(BlokusDuoPlay blokusDuoPlay) {
         this.blokusDuoPlay = blokusDuoPlay;
@@ -39,6 +42,9 @@ public class BlokusGame extends Game {
         camera = new OrthographicCamera();
         camera.position.set(VIRTUAL_WIDTH  * 0.5f, VIRTUAL_HEIGHT * 0.5f, 0.0f);
         viewport = new FitViewport(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, camera);
+
+        batch = new SpriteBatch();
+        batch.setProjectionMatrix(camera.combined);
 
         stage = new Stage(viewport);
         skin = new Skin(Gdx.files.internal("scene.json"));
@@ -96,6 +102,10 @@ public class BlokusGame extends Game {
 
     public static int getVirtualWidth() {
         return VIRTUAL_WIDTH;
+    }
+
+    public void updateBoard(Board board) {
+        playScreen.graphicalBoard.updateBoard(board);
     }
 
     public static int getVirtualHeight() {

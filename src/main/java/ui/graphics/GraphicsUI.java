@@ -57,36 +57,12 @@ public class GraphicsUI implements ui.UI {
     }
 
     private void updateBoardDisplay() {
-        for (int y=board.HEIGHT-1; y>=0; y--) {
-            System.out.printf("%2d ",y);
-            for (int x = 0; x < board.WIDTH; x++) {
-                if (board.isOccupied(x,y)) {
-                    System.out.print(playerSymbol[board.getOccupyingPlayer(x,y)]+" ");
-                }
-                else {
-                    boolean isStartingLocation = false;
-                    int playerNo;
-                    for (playerNo = 0; playerNo < Board.startLocations.length; playerNo++) {
-                        Location location = Board.startLocations[playerNo];
-                        if ( x == location.getX() && y == location.getY() ) {
-                            isStartingLocation = true;
-                            break;
-                        }
-                    }
-                    if (isStartingLocation) {
-                        System.out.print(startingPositionSymbol[playerNo]+" ");
-                    } else {
-                        System.out.print(". ");
-                    }
-                }
+        game.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                game.updateBoard(board);
             }
-            System.out.println();
-        }
-        System.out.print("  ");
-        for (int x=0; x<board.WIDTH; x++) {
-            System.out.printf("%2d",x);
-        }
-        System.out.println();
+        });
     }
 
     @Override

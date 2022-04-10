@@ -2,14 +2,18 @@ package ui.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ScreenUtils;
 import model.Board;
 
 
@@ -21,6 +25,7 @@ public class PlayScreen extends ScreenAdapter {
     GraphicalBoard graphicalBoard;
     String message;
     BitmapFont messageFont;
+    SpriteBatch batch;
     float messageX;
     float messageY;
     float messageWidth;
@@ -28,6 +33,7 @@ public class PlayScreen extends ScreenAdapter {
     public PlayScreen(BlokusGame blokusGame) {
         this.blokusGame = blokusGame;
         this.stage = blokusGame.getStage();
+        this.batch = blokusGame.batch;
 
         MapLayer layer = blokusGame.bored.getLayers().get("Object Layer");
         MapObjects objects = layer.getObjects();
@@ -44,14 +50,20 @@ public class PlayScreen extends ScreenAdapter {
         float boardHeight = (float) boardLocation.getProperties().get("height");
         float boardWidth = (float) boardLocation.getProperties().get("width");
         graphicalBoard = new GraphicalBoard(boardX,boardY,boardWidth,boardHeight,xPicture,oPicture,new Board());
+
+
     }
 
     public void render(float delta) {
+        ScreenUtils.clear(Color.WHITE);
         super.render(delta);
-        // just show light blue window for now
-        Gdx.gl.glClearColor(0.8196f, 0.7803f, 0.4274f, 1.0f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        batch.begin();
+        for (GraphicalGamepiece p : pieces) {
+            p.draw(batch);
+        }
+        graphicalBoard.draw(batch);
+        //messageFont.draw(batch,message,messageX,messageY,messageWidth, Align.center,true);
+        batch.end();
         stage.act();
         stage.draw();
     }
