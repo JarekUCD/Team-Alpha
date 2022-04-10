@@ -73,7 +73,7 @@ test {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'Sprint3'
+                'Main-Class': 'Sprint4'
         )
     }
 }
